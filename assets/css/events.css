@@ -1,36 +1,237 @@
-/* events */
+/* ==========================================================================
+   WP Events Manager - Front-end styles
+   ========================================================================== */
 
-.event-single .event-header {
-	margin-bottom: 1em;
+/* Archive */
+.wpem-events-archive {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
-.event-single .event-title {
-	margin: 0 0 0.5em;
+.wpem-events-archive h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
 }
 
-.event-single .event-content {
-	margin-bottom: 1.5em;
+.wpem-filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 32px;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
 }
 
-.events-archive-header {
-	margin-bottom: 1.5em;
+.wpem-filter-form select,
+.wpem-filter-form input[type="date"],
+.wpem-filter-form input[type="text"] {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
-.events-archive-list {
-	display: grid;
-	gap: 1.5rem;
+.wpem-filter-form button {
+    padding: 8px 20px;
+    background: #0073aa;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
 }
 
-.event-card {
-	padding: 1rem;
-	border: 1px solid #e0e0e0;
-	border-radius: 4px;
+.wpem-filter-form button:hover {
+    background: #005177;
 }
 
-.event-card .event-title {
-	margin: 0 0 0.5em;
+.wpem-events-grid {
+    display: grid;
+    grid-template-columns: repeat( auto-fill, minmax( 300px, 1fr ) );
+    gap: 24px;
 }
 
-.event-card .event-excerpt {
-	margin: 0;
+.wpem-event-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+}
+
+.wpem-event-card:hover {
+    box-shadow: 0 4px 16px rgba( 0, 0, 0, 0.1 );
+}
+
+.wpem-event-card-body {
+    padding: 20px;
+}
+
+.wpem-event-card-body h2 {
+    font-size: 1.2rem;
+    margin: 0 0 10px;
+}
+
+.wpem-event-card-body h2 a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.wpem-event-card-body h2 a:hover {
+    color: #0073aa;
+}
+
+.wpem-event-meta {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 6px;
+}
+
+.wpem-event-meta span {
+    margin-right: 6px;
+}
+
+.wpem-event-type-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    background: #e8f0fe;
+    color: #1a56db;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.wpem-read-more {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 16px;
+    background: #0073aa;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.wpem-read-more:hover {
+    background: #005177;
+    color: #fff;
+}
+
+.wpem-no-events {
+    padding: 40px;
+    text-align: center;
+    color: #666;
+    background: #f9f9f9;
+    border-radius: 6px;
+}
+
+/* Single event */
+.wpem-single-event {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.wpem-single-event h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.wpem-event-details-box {
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 32px;
+}
+
+.wpem-event-details-box p {
+    margin: 0 0 10px;
+    font-size: 15px;
+}
+
+.wpem-event-details-box p:last-child {
+    margin-bottom: 0;
+}
+
+.wpem-event-details-box strong {
+    display: inline-block;
+    min-width: 100px;
+    color: #333;
+}
+
+.wpem-event-content {
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+}
+
+/* RSVP box */
+.wpem-rsvp-box {
+    background: #fff;
+    border: 2px solid #0073aa;
+    border-radius: 8px;
+    padding: 24px;
+    margin-top: 32px;
+}
+
+.wpem-rsvp-box h3 {
+    margin: 0 0 12px;
+    font-size: 1.2rem;
+}
+
+.wpem-rsvp-box p {
+    margin-bottom: 16px;
+    color: #555;
+}
+
+.wpem-rsvp-btn {
+    display: inline-block;
+    padding: 10px 24px;
+    background: #0073aa;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.wpem-rsvp-btn:hover {
+    background: #005177;
+    color: #fff;
+}
+
+.wpem-rsvp-btn.wpem-rsvp-cancel {
+    background: #d63638;
+}
+
+.wpem-rsvp-btn.wpem-rsvp-cancel:hover {
+    background: #b32d2e;
+}
+
+.wpem-rsvp-confirmed {
+    color: #00a32a;
+    font-weight: 600;
+}
+
+.wpem-capacity-info {
+    font-size: 13px;
+    color: #666;
+    margin-top: 10px;
+}
+
+/* Back link */
+.wpem-back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: #0073aa;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.wpem-back-link:hover {
+    text-decoration: underline;
 }
