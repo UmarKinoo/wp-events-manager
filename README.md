@@ -67,6 +67,16 @@ Expected: `OK (7 tests, 10 assertions)`
 
 All strings use the `wp-events-manager` text domain. A `.pot` file is included in `languages/` for translators.
 
+## Sample Data
+
+To install sample events for testing, run:
+```bash
+wp eval-file sample-data.php
+```
+
+This creates 3 sample events with different event types, dates and locations.
+
+
 ## Author
 
 Umar Kinoo
