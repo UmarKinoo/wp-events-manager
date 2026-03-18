@@ -1,0 +1,361 @@
+# Copyright (C) 2026 Umar Kinoo
+# This file is distributed under the same license as the WP Events Manager plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Events Manager 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-events-manager\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-03-18T21:12:20+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: wp-events-manager\n"
+
+#. Plugin Name of the plugin
+#: wp-events-manager.php
+msgid "WP Events Manager"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: wp-events-manager.php
+msgid "PLUGIN SITE HERE"
+msgstr ""
+
+#. Description of the plugin
+#: wp-events-manager.php
+msgid "A custom events plugin with RSVP, filtering, and REST API."
+msgstr ""
+
+#. Author of the plugin
+#: wp-events-manager.php
+msgid "Umar Kinoo"
+msgstr ""
+
+#. Author URI of the plugin
+#: wp-events-manager.php
+msgid "YOUR SITE HERE"
+msgstr ""
+
+#: includes/class-event-meta-boxes.php:26
+msgid "Event Details"
+msgstr ""
+
+#: includes/class-event-meta-boxes.php:51
+msgid "Start Date"
+msgstr ""
+
+#: includes/class-event-meta-boxes.php:65
+msgid "End Date"
+msgstr ""
+
+#: includes/class-event-meta-boxes.php:79
+#: includes/class-event-post-type.php:97
+msgid "Location"
+msgstr ""
+
+#: includes/class-event-meta-boxes.php:88
+msgid "e.g. Ebène CyberCity, Mauritius"
+msgstr ""
+
+#: includes/class-event-meta-boxes.php:94
+msgid "Capacity"
+msgstr ""
+
+#: includes/class-event-meta-boxes.php:105
+msgid "Maximum number of attendees. Leave blank for unlimited."
+msgstr ""
+
+#. translators: %s: event title
+#: includes/class-event-notifications.php:68
+#, php-format
+msgid "New Event Published: %s"
+msgstr ""
+
+#: includes/class-event-notifications.php:75
+msgid "A new event has been published on your site."
+msgstr ""
+
+#. translators: %s: event title
+#: includes/class-event-notifications.php:77
+#: includes/class-event-notifications.php:117
+#: includes/class-event-notifications.php:154
+#, php-format
+msgid "Event: %s"
+msgstr ""
+
+#. translators: %s: event date
+#: includes/class-event-notifications.php:79
+#: includes/class-event-notifications.php:119
+#: includes/class-event-notifications.php:156
+#, php-format
+msgid "Date: %s"
+msgstr ""
+
+#. translators: %s: event location
+#: includes/class-event-notifications.php:81
+#: includes/class-event-notifications.php:121
+#: includes/class-event-notifications.php:158
+#, php-format
+msgid "Location: %s"
+msgstr ""
+
+#. translators: %s: event URL
+#: includes/class-event-notifications.php:83
+#: includes/class-event-notifications.php:123
+#: includes/class-event-notifications.php:160
+#, php-format
+msgid "View Event: %s"
+msgstr ""
+
+#. translators: %s: event title
+#: includes/class-event-notifications.php:105
+#, php-format
+msgid "Event Updated: %s"
+msgstr ""
+
+#. translators: %s: user display name
+#: includes/class-event-notifications.php:114
+#: includes/class-event-notifications.php:151
+#: includes/class-event-notifications.php:186
+#, php-format
+msgid "Hi %s,"
+msgstr ""
+
+#: includes/class-event-notifications.php:115
+msgid "An event you RSVPed for has been updated."
+msgstr ""
+
+#. translators: %s: event title
+#: includes/class-event-notifications.php:146
+#, php-format
+msgid "RSVP Confirmed: %s"
+msgstr ""
+
+#: includes/class-event-notifications.php:152
+msgid "Your RSVP has been confirmed for the following event:"
+msgstr ""
+
+#: includes/class-event-notifications.php:161
+msgid "We look forward to seeing you there!"
+msgstr ""
+
+#. translators: %s: event title
+#: includes/class-event-notifications.php:181
+#, php-format
+msgid "RSVP Cancelled: %s"
+msgstr ""
+
+#. translators: %s: event title
+#: includes/class-event-notifications.php:188
+#, php-format
+msgid "Your RSVP for \"%s\" has been cancelled."
+msgstr ""
+
+#. translators: %s: event URL
+#: includes/class-event-notifications.php:190
+#, php-format
+msgid "If this was a mistake, you can re-register here: %s"
+msgstr ""
+
+#: includes/class-event-post-type.php:31
+#: templates/archive-event.php:20
+msgid "Events"
+msgstr ""
+
+#: includes/class-event-post-type.php:32
+msgid "Event"
+msgstr ""
+
+#: includes/class-event-post-type.php:33
+msgid "Add New"
+msgstr ""
+
+#: includes/class-event-post-type.php:34
+msgid "Add New Event"
+msgstr ""
+
+#: includes/class-event-post-type.php:35
+msgid "Edit Event"
+msgstr ""
+
+#: includes/class-event-post-type.php:36
+msgid "New Event"
+msgstr ""
+
+#: includes/class-event-post-type.php:37
+#: includes/class-event-post-type.php:293
+#: templates/archive-event.php:101
+msgid "View Event"
+msgstr ""
+
+#: includes/class-event-post-type.php:38
+msgid "Search Events"
+msgstr ""
+
+#: includes/class-event-post-type.php:39
+msgid "No events found"
+msgstr ""
+
+#: includes/class-event-post-type.php:40
+msgid "No events found in trash"
+msgstr ""
+
+#: includes/class-event-post-type.php:63
+#: includes/class-event-post-type.php:71
+msgid "Event Types"
+msgstr ""
+
+#: includes/class-event-post-type.php:64
+#: includes/class-event-post-type.php:98
+msgid "Event Type"
+msgstr ""
+
+#: includes/class-event-post-type.php:65
+msgid "Search Event Types"
+msgstr ""
+
+#: includes/class-event-post-type.php:66
+#: templates/archive-event.php:25
+msgid "All Event Types"
+msgstr ""
+
+#: includes/class-event-post-type.php:67
+msgid "Edit Event Type"
+msgstr ""
+
+#: includes/class-event-post-type.php:68
+msgid "Update Event Type"
+msgstr ""
+
+#: includes/class-event-post-type.php:69
+msgid "Add New Event Type"
+msgstr ""
+
+#: includes/class-event-post-type.php:70
+msgid "New Event Type Name"
+msgstr ""
+
+#: includes/class-event-post-type.php:96
+msgid "Date"
+msgstr ""
+
+#: includes/class-event-post-type.php:301
+#: templates/archive-event.php:114
+msgid "No events found."
+msgstr ""
+
+#: includes/class-event-rsvp.php:63
+msgid "RSVP for this Event"
+msgstr ""
+
+#: includes/class-event-rsvp.php:69
+#, php-format
+msgid "%1$d of %2$d spots taken"
+msgstr ""
+
+#: includes/class-event-rsvp.php:78
+msgid "You must be logged in to RSVP."
+msgstr ""
+
+#: includes/class-event-rsvp.php:80
+msgid "Log in to RSVP"
+msgstr ""
+
+#: includes/class-event-rsvp.php:85
+msgid "You are attending this event."
+msgstr ""
+
+#: includes/class-event-rsvp.php:93
+msgid "Cancel RSVP"
+msgstr ""
+
+#: includes/class-event-rsvp.php:98
+msgid "Sorry, this event is full."
+msgstr ""
+
+#: includes/class-event-rsvp.php:107
+msgid "RSVP Now"
+msgstr ""
+
+#: includes/class-event-rsvp.php:123
+msgid "Security check failed."
+msgstr ""
+
+#: includes/class-event-rsvp.php:179
+msgid "RSVP Attendees"
+msgstr ""
+
+#: includes/class-event-rsvp.php:202
+msgid "Total RSVPs:"
+msgstr ""
+
+#: includes/class-event-rsvp.php:205
+msgid "capacity"
+msgstr ""
+
+#: includes/class-event-rsvp.php:213
+msgid "Name"
+msgstr ""
+
+#: includes/class-event-rsvp.php:214
+msgid "Email"
+msgstr ""
+
+#: includes/class-event-rsvp.php:215
+msgid "Username"
+msgstr ""
+
+#: includes/class-event-rsvp.php:229
+msgid "No attendees yet."
+msgstr ""
+
+#: templates/archive-event.php:40
+msgid "From date"
+msgstr ""
+
+#: templates/archive-event.php:47
+msgid "To date"
+msgstr ""
+
+#: templates/archive-event.php:54
+msgid "Search events..."
+msgstr ""
+
+#: templates/archive-event.php:57
+msgid "Filter"
+msgstr ""
+
+#: templates/archive-event.php:60
+msgid "Clear filters"
+msgstr ""
+
+#: templates/single-event.php:21
+msgid "Back to Events"
+msgstr ""
+
+#: templates/single-event.php:39
+msgid "Start Date:"
+msgstr ""
+
+#: templates/single-event.php:46
+msgid "End Date:"
+msgstr ""
+
+#: templates/single-event.php:53
+msgid "Location:"
+msgstr ""
+
+#: templates/single-event.php:60
+msgid "Capacity:"
+msgstr ""
+
+#: templates/single-event.php:61
+msgid "attendees"
+msgstr ""
+
+#: templates/single-event.php:67
+msgid "Type:"
+msgstr ""

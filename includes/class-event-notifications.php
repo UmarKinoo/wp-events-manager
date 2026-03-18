@@ -73,9 +73,13 @@ class Event_Notifications {
 		$location = get_post_meta( $post->ID, '_event_location', true );
 
 		$message  = sprintf( __( 'A new event has been published on your site.', 'wp-events-manager' ) ) . "\n\n";
+		/* translators: %s: event title */
 		$message .= sprintf( __( 'Event: %s', 'wp-events-manager' ), $post->post_title ) . "\n";
+		/* translators: %s: event date */
 		$message .= $date ? sprintf( __( 'Date: %s', 'wp-events-manager' ), date( 'F j, Y', strtotime( $date ) ) ) . "\n" : '';
+		/* translators: %s: event location */
 		$message .= $location ? sprintf( __( 'Location: %s', 'wp-events-manager' ), $location ) . "\n" : '';
+		/* translators: %s: event URL */
 		$message .= sprintf( __( 'View Event: %s', 'wp-events-manager' ), get_permalink( $post->ID ) ) . "\n";
 
 		wp_mail( $admin_email, $subject, $message );
@@ -106,11 +110,16 @@ class Event_Notifications {
 		$location = get_post_meta( $post->ID, '_event_location', true );
 
 		foreach ( $users as $user ) {
+			/* translators: %s: user display name */
 			$message  = sprintf( __( 'Hi %s,', 'wp-events-manager' ), $user->display_name ) . "\n\n";
 			$message .= sprintf( __( 'An event you RSVPed for has been updated.', 'wp-events-manager' ) ) . "\n\n";
+			/* translators: %s: event title */
 			$message .= sprintf( __( 'Event: %s', 'wp-events-manager' ), $post->post_title ) . "\n";
+			/* translators: %s: event date */
 			$message .= $date ? sprintf( __( 'Date: %s', 'wp-events-manager' ), date( 'F j, Y', strtotime( $date ) ) ) . "\n" : '';
+			/* translators: %s: event location */
 			$message .= $location ? sprintf( __( 'Location: %s', 'wp-events-manager' ), $location ) . "\n" : '';
+			/* translators: %s: event URL */
 			$message .= sprintf( __( 'View Event: %s', 'wp-events-manager' ), get_permalink( $post->ID ) ) . "\n";
 
 			wp_mail( $user->user_email, $subject, $message );
@@ -126,6 +135,9 @@ class Event_Notifications {
 	public function send_rsvp_confirmation( $user_id, $event_id ) {
 		$user     = get_userdata( $user_id );
 		$event    = get_post( $event_id );
+		if ( ! $user || ! $event ) {
+			return;
+		}
 		$date     = get_post_meta( $event_id, '_event_date', true );
 		$location = get_post_meta( $event_id, '_event_location', true );
 
@@ -135,11 +147,16 @@ class Event_Notifications {
 			$event->post_title
 		);
 
+		/* translators: %s: user display name */
 		$message  = sprintf( __( 'Hi %s,', 'wp-events-manager' ), $user->display_name ) . "\n\n";
 		$message .= __( 'Your RSVP has been confirmed for the following event:', 'wp-events-manager' ) . "\n\n";
+		/* translators: %s: event title */
 		$message .= sprintf( __( 'Event: %s', 'wp-events-manager' ), $event->post_title ) . "\n";
+		/* translators: %s: event date */
 		$message .= $date ? sprintf( __( 'Date: %s', 'wp-events-manager' ), date( 'F j, Y', strtotime( $date ) ) ) . "\n" : '';
+		/* translators: %s: event location */
 		$message .= $location ? sprintf( __( 'Location: %s', 'wp-events-manager' ), $location ) . "\n" : '';
+		/* translators: %s: event URL */
 		$message .= sprintf( __( 'View Event: %s', 'wp-events-manager' ), get_permalink( $event_id ) ) . "\n\n";
 		$message .= __( 'We look forward to seeing you there!', 'wp-events-manager' ) . "\n";
 
@@ -155,6 +172,9 @@ class Event_Notifications {
 	public function send_rsvp_cancellation( $user_id, $event_id ) {
 		$user  = get_userdata( $user_id );
 		$event = get_post( $event_id );
+		if ( ! $user || ! $event ) {
+			return;
+		}
 
 		$subject = sprintf(
 			/* translators: %s: event title */
@@ -162,8 +182,11 @@ class Event_Notifications {
 			$event->post_title
 		);
 
+		/* translators: %s: user display name */
 		$message  = sprintf( __( 'Hi %s,', 'wp-events-manager' ), $user->display_name ) . "\n\n";
+		/* translators: %s: event title */
 		$message .= sprintf( __( 'Your RSVP for "%s" has been cancelled.', 'wp-events-manager' ), $event->post_title ) . "\n\n";
+		/* translators: %s: event URL */
 		$message .= sprintf( __( 'If this was a mistake, you can re-register here: %s', 'wp-events-manager' ), get_permalink( $event_id ) ) . "\n";
 
 		wp_mail( $user->user_email, $subject, $message );

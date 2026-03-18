@@ -63,15 +63,15 @@ class Event_RSVP {
 			<h3><?php esc_html_e( 'RSVP for this Event', 'wp-events-manager' ); ?></h3>
 
 			<?php if ( $capacity ) : ?>
-				<p class="wpem-capacity-info">
-					<?php
-					printf(
+				<?php
+					/* translators: %1$d: number of RSVPs, %2$d: total capacity */
+					$spots_taken = sprintf(
 						esc_html__( '%1$d of %2$d spots taken', 'wp-events-manager' ),
 						$rsvp_count,
 						(int) $capacity
 					);
-					?>
-				</p>
+				?>
+				<p class="wpem-capacity-info"><?php echo $spots_taken; ?></p>
 			<?php endif; ?>
 
 			<?php if ( ! is_user_logged_in() ) : ?>
