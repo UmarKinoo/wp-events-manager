@@ -49,3 +49,29 @@ register_activation_hook( __FILE__, function() {
 register_deactivation_hook( __FILE__, function() {
 	flush_rewrite_rules();
 } );
+
+
+// Expose event meta in REST API via custom fields.
+add_action( 'rest_api_init', function() {
+    $fields = array(
+        'event_date'     => '_event_date',
+        'event_end_date' => '_event_end_date',
+        'event_location' => '_event_location',
+        'event_capacity' => '_event_capacity',
+    );
+
+    foreach ( $fields as $field_name => $meta_key ) {
+        register_rest_field( 'event', $field_name, array(
+            'get_callback' => function( $post ) use ( $meta_key ) {
+                return get_post_meta( $post['id'], $meta_key, true );
+            },
+            'update_callback' => function( $value, $post ) use ( $meta_key ) {
+                update_post_meta( $post->ID, $meta_key, sanitize_text_field( $value ) );
+            },
+            'schema' => array(
+                'type'    => 'string',
+                'context' => array( 'view', 'edit' ),
+            ),
+        ) );
+    }
+} );

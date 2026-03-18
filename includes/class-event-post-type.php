@@ -20,6 +20,7 @@ class Event_Post_Type {
 		add_filter( 'template_include', array( $this, 'load_templates' ) );
 		add_action( 'pre_get_posts', array( $this, 'filter_events_query' ) );
 		add_shortcode( 'events_list', array( $this, 'render_shortcode' ) );
+		add_action( 'save_post_event', array( $this, 'clear_event_cache' ) );
 	}
 
 	/**
@@ -245,7 +246,8 @@ class Event_Post_Type {
 			);
 		}
 
-		$events = new WP_Query( $args );
+		$cache_key = 'wpem_shortcode_' . md5( serialize( $args ) );
+		$events    = $this->get_cached_events( $args, $cache_key );
 
 		ob_start();
 
@@ -300,6 +302,38 @@ class Event_Post_Type {
 		<?php endif;
 
 		return ob_get_clean();
+	}
+	
+	/**
+	 * Get cached events or run fresh query.
+	 *
+	 * @param array $args WP_Query args.
+	 * @param string $cache_key Unique cache key.
+	 * @return WP_Query
+	 */
+	public function get_cached_events( $args, $cache_key ) {
+		$cached = get_transient( $cache_key );
+
+		if ( false !== $cached ) {
+			return $cached;
+		}
+
+		$query = new WP_Query( $args );
+		set_transient( $cache_key, $query, HOUR_IN_SECONDS );
+
+		return $query;
+	}
+
+	/**
+	 * Clear event transient cache when an event is saved.
+	 *
+	 * @param int $post_id Post ID.
+	 */
+	public function clear_event_cache( $post_id ) {
+		global $wpdb;
+		$wpdb->query(
+			"DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_wpem_%'"
+		);
 	}
 	
 }

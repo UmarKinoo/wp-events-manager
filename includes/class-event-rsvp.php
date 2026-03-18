@@ -16,6 +16,7 @@ class Event_RSVP {
 		add_action( 'wpem_single_event_rsvp', array( $this, 'render_rsvp_box' ) );
 		add_action( 'admin_post_wpem_rsvp', array( $this, 'handle_rsvp' ) );
 		add_action( 'admin_post_nopriv_wpem_rsvp', array( $this, 'handle_rsvp_not_logged_in' ) );
+		add_action( 'add_meta_boxes', array( $this, 'register_rsvp_meta_box' ) );
 	}
 
 	/**
@@ -168,5 +169,64 @@ class Event_RSVP {
 		$event_id = isset( $_POST['event_id'] ) ? absint( $_POST['event_id'] ) : 0;
 		wp_redirect( wp_login_url( get_permalink( $event_id ) ) );
 		exit;
+	}
+	/**
+	 * Register RSVP meta box on the event edit screen.
+	 */
+	public function register_rsvp_meta_box() {
+		add_meta_box(
+			'wpem_rsvp_attendees',
+			__( 'RSVP Attendees', 'wp-events-manager' ),
+			array( $this, 'render_rsvp_meta_box' ),
+			'event',
+			'normal',
+			'default'
+		);
+	}
+
+	/**
+	 * Render the RSVP attendees meta box.
+	 *
+	 * @param WP_Post $post Current post object.
+	 */
+	public function render_rsvp_meta_box( $post ) {
+		$capacity   = get_post_meta( $post->ID, '_event_capacity', true );
+		$rsvp_count = $this->get_rsvp_count( $post->ID );
+
+		$users = get_users( array(
+			'meta_key'   => 'wpem_rsvp_' . $post->ID,
+			'meta_value' => 'yes',
+		) );
+		?>
+		<p>
+			<strong><?php esc_html_e( 'Total RSVPs:', 'wp-events-manager' ); ?></strong>
+			<?php echo esc_html( $rsvp_count ); ?>
+			<?php if ( $capacity ) : ?>
+				/ <?php echo esc_html( $capacity ); ?> <?php esc_html_e( 'capacity', 'wp-events-manager' ); ?>
+			<?php endif; ?>
+		</p>
+
+		<?php if ( ! empty( $users ) ) : ?>
+			<table class="widefat striped" style="margin-top:12px;">
+				<thead>
+					<tr>
+						<th><?php esc_html_e( 'Name', 'wp-events-manager' ); ?></th>
+						<th><?php esc_html_e( 'Email', 'wp-events-manager' ); ?></th>
+						<th><?php esc_html_e( 'Username', 'wp-events-manager' ); ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ( $users as $user ) : ?>
+						<tr>
+							<td><?php echo esc_html( $user->display_name ); ?></td>
+							<td><?php echo esc_html( $user->user_email ); ?></td>
+							<td><?php echo esc_html( $user->user_login ); ?></td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+		<?php else : ?>
+			<p style="color:#666;"><?php esc_html_e( 'No attendees yet.', 'wp-events-manager' ); ?></p>
+		<?php endif;
 	}
 }
