@@ -207,5 +207,99 @@ class Event_Post_Type {
 			$query->set( 'order', 'ASC' );
 		}
 	}
+
+	/**
+	 * Render the [events_list] shortcode.
+	 *
+	 * @param array $atts Shortcode attributes.
+	 * @return string HTML output.
+	 */
+	public function render_shortcode( $atts ) {
+		$atts = shortcode_atts(
+			array(
+				'count'   => 6,
+				'type'    => '',
+				'orderby' => 'meta_value',
+				'order'   => 'ASC',
+			),
+			$atts,
+			'events_list'
+		);
+
+		$args = array(
+			'post_type'      => 'event',
+			'posts_per_page' => absint( $atts['count'] ),
+			'meta_key'       => '_event_date',
+			'orderby'        => sanitize_text_field( $atts['orderby'] ),
+			'order'          => sanitize_text_field( $atts['order'] ),
+			'post_status'    => 'publish',
+		);
+
+		if ( ! empty( $atts['type'] ) ) {
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => 'event_type',
+					'field'    => 'slug',
+					'terms'    => sanitize_text_field( $atts['type'] ),
+				),
+			);
+		}
+
+		$events = new WP_Query( $args );
+
+		ob_start();
+
+		wp_enqueue_style(
+			'wpem-events',
+			WP_EVENTS_MANAGER_PLUGIN_URL . 'assets/css/events.css',
+			array(),
+			WP_EVENTS_MANAGER_VERSION
+		);
+
+		if ( $events->have_posts() ) : ?>
+			<div class="wpem-events-grid">
+				<?php while ( $events->have_posts() ) : $events->the_post(); ?>
+					<?php
+					$date     = get_post_meta( get_the_ID(), '_event_date', true );
+					$location = get_post_meta( get_the_ID(), '_event_location', true );
+					$terms    = get_the_terms( get_the_ID(), 'event_type' );
+					?>
+					<div class="wpem-event-card">
+						<div class="wpem-event-card-body">
+							<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+
+							<?php if ( $date ) : ?>
+								<p class="wpem-event-meta">
+									📅 <?php echo esc_html( date( 'M j, Y', strtotime( $date ) ) ); ?>
+								</p>
+							<?php endif; ?>
+
+							<?php if ( $location ) : ?>
+								<p class="wpem-event-meta">
+									📍 <?php echo esc_html( $location ); ?>
+								</p>
+							<?php endif; ?>
+
+							<?php if ( $terms && ! is_wp_error( $terms ) ) : ?>
+								<?php foreach ( $terms as $term ) : ?>
+									<span class="wpem-event-type-badge"><?php echo esc_html( $term->name ); ?></span>
+								<?php endforeach; ?>
+							<?php endif; ?>
+
+							<br>
+							<a href="<?php the_permalink(); ?>" class="wpem-read-more">
+								<?php esc_html_e( 'View Event', 'wp-events-manager' ); ?>
+							</a>
+						</div>
+					</div>
+				<?php endwhile; ?>
+			</div>
+			<?php wp_reset_postdata(); ?>
+		<?php else : ?>
+			<p class="wpem-no-events"><?php esc_html_e( 'No events found.', 'wp-events-manager' ); ?></p>
+		<?php endif;
+
+		return ob_get_clean();
+	}
 	
 }
