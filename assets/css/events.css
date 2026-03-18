@@ -1,0 +1,36 @@
+/* events */
+
+.event-single .event-header {
+	margin-bottom: 1em;
+}
+
+.event-single .event-title {
+	margin: 0 0 0.5em;
+}
+
+.event-single .event-content {
+	margin-bottom: 1.5em;
+}
+
+.events-archive-header {
+	margin-bottom: 1.5em;
+}
+
+.events-archive-list {
+	display: grid;
+	gap: 1.5rem;
+}
+
+.event-card {
+	padding: 1rem;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+}
+
+.event-card .event-title {
+	margin: 0 0 0.5em;
+}
+
+.event-card .event-excerpt {
+	margin: 0;
+}
