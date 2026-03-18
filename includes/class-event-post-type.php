@@ -18,6 +18,8 @@ class Event_Post_Type {
 		add_filter( 'manage_event_posts_columns', array( $this, 'admin_columns' ) );
 		add_action( 'manage_event_posts_custom_column', array( $this, 'admin_column_content' ), 10, 2 );
 		add_filter( 'template_include', array( $this, 'load_templates' ) );
+		add_action( 'pre_get_posts', array( $this, 'filter_events_query' ) );
+		add_shortcode( 'events_list', array( $this, 'render_shortcode' ) );
 	}
 
 	/**
@@ -149,4 +151,61 @@ class Event_Post_Type {
 
 		return $template;
 	}
+	
+	/**
+	 * Modify the main query to handle filtering and search on the events archive.
+	 *
+	 * @param WP_Query $query The current query object.
+	 */
+	public function filter_events_query( $query ) {
+		if ( ! is_admin() && $query->is_main_query() && is_post_type_archive( 'event' ) ) {
+
+			// Filter by event type taxonomy.
+			if ( ! empty( $_GET['event_type'] ) ) {
+				$query->set( 'tax_query', array(
+					array(
+						'taxonomy' => 'event_type',
+						'field'    => 'slug',
+						'terms'    => sanitize_text_field( $_GET['event_type'] ),
+					),
+				) );
+			}
+
+			// Filter by keyword search.
+			if ( ! empty( $_GET['event_search'] ) ) {
+				$query->set( 's', sanitize_text_field( $_GET['event_search'] ) );
+			}
+
+			// Filter by date range.
+			if ( ! empty( $_GET['date_from'] ) || ! empty( $_GET['date_to'] ) ) {
+				$meta_query = array( 'relation' => 'AND' );
+
+				if ( ! empty( $_GET['date_from'] ) ) {
+					$meta_query[] = array(
+						'key'     => '_event_date',
+						'value'   => sanitize_text_field( $_GET['date_from'] ),
+						'compare' => '>=',
+						'type'    => 'DATE',
+					);
+				}
+
+				if ( ! empty( $_GET['date_to'] ) ) {
+					$meta_query[] = array(
+						'key'     => '_event_date',
+						'value'   => sanitize_text_field( $_GET['date_to'] ),
+						'compare' => '<=',
+						'type'    => 'DATE',
+					);
+				}
+
+				$query->set( 'meta_query', $meta_query );
+			}
+
+			// Default order by event date ascending.
+			$query->set( 'meta_key', '_event_date' );
+			$query->set( 'orderby', 'meta_value' );
+			$query->set( 'order', 'ASC' );
+		}
+	}
+	
 }
